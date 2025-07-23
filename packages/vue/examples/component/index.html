@@ -12,28 +12,19 @@
     <my-component></my-component>
   </div>
   <script>
-    const { createApp } = Vue
+    const { createApp, ref, computed, onMounted } = Vue
     const app = createApp({});
     app.component(
       'MyComponent',
       {
         template: '<div><div>{{ count }} - {{ doubleData }}</div><button @click="increment">增加</button></div>',
-        data() {
-          return {
-            count: 1
-          }
-        },
-        computed: {
-          doubleData() {
-            return this.count * 2
-          }
-        },
-        methods: {
-          increment() {
-            this.count = this.count + 1
-          }
-        },
-        mounted() { console.log('mounted') }
+        setup() {
+          let count = ref(1);
+          const doubleData = computed(() => count.value * 2);
+          const increment = () => count.value++;
+          onMounted(() => { console.log('mounted') });
+          return { count, doubleData, increment }; //暴露给模板
+        }
       }
     )
     app.mount('#app');

@@ -127,6 +127,9 @@ for (const target of targets) {
     plugins.push(polyfillNode())
   }
 
+  console.log('哈哈哈哈哇啊娃娃哈')
+  console.log([resolve(__dirname, `${pkgBasePath}/src/index.ts`)])
+
   esbuild
     .context({
       entryPoints: [resolve(__dirname, `${pkgBasePath}/src/index.ts`)],
